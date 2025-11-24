@@ -1,11 +1,8 @@
 package upeu.edu.pe.Hostpital.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "citas")
@@ -16,5 +13,27 @@ public class Citas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private String nombrePaciente;
 
+    @Column(nullable = false)
+    private String nombreDoctor;
+
+    @Column(nullable = false)
+    private LocalDateTime fechaHora;
+
+    @Column(nullable = false)
+    private String especialidad;
+
+    @Column(nullable = false)
+    private String motivo;
+
+    @Column(nullable = false)
+    private String estado;
+
+    @Column(nullable = false)
+    private String telefono;
+
+    @Column(columnDefinition = "TEXT")
+    private String observaciones;
 }

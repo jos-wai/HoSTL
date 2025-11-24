@@ -1,10 +1,212 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Historial - RegHost</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #00d2d3 0%, #01a3a4 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            margin: 2rem auto;
+            padding: 2rem;
+            max-width: 900px;
+        }
+        .header-section {
+            background: linear-gradient(135deg, #00d2d3 0%, #01a3a4 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .form-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #00d2d3;
+        }
+        .form-floating {
+            margin-bottom: 1.5rem;
+        }
+        .form-control, .form-select {
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #00d2d3;
+            box-shadow: 0 0 0 0.2rem rgba(0, 210, 211, 0.25);
+        }
+        .btn-custom {
+            background: linear-gradient(135deg, #00d2d3 0%, #01a3a4 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+        .btn-secondary-custom {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .btn-secondary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+    </style>
 </head>
 <body>
+<div class="container">
+    <div class="form-container">
+        <div class="header-section">
+            <h1><i class="fas fa-file-medical-alt me-3"></i>Editar Historial Médico</h1>
+            <p class="mb-0">Modifique el historial clínico del paciente</p>
+        </div>
 
+        <form th:action="@{/historiales/guardar}" th:object="${historial}" method="post">
+            <div class="form-section">
+            <input type="hidden" th:field="*{id}">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="nombrePaciente" th:field="*{nombrePaciente}"
+                                   placeholder="Nombre del paciente" required>
+                            <label for="nombrePaciente"><i class="fas fa-user me-2"></i>Nombre del Paciente</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="dniPaciente" th:field="*{dniPaciente}"
+                                   placeholder="DNI del paciente" pattern="[0-9]{8}" maxlength="8" required>
+                            <label for="dniPaciente"><i class="fas fa-id-card me-2"></i>DNI del Paciente</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" id="fechaConsulta" th:field="*{fechaConsulta}" required>
+                            <label for="fechaConsulta"><i class="fas fa-calendar me-2"></i>Fecha de Consulta</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="doctorTratante" th:field="*{doctorTratante}"
+                                   placeholder="Doctor tratante" required>
+                            <label for="doctorTratante"><i class="fas fa-user-md me-2"></i>Doctor Tratante</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="diagnostico" th:field="*{diagnostico}"
+                                   placeholder="Diagnóstico" required>
+                            <label for="diagnostico"><i class="fas fa-diagnoses me-2"></i>Diagnóstico</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="tipoConsulta" th:field="*{tipoConsulta}" required>
+                                <option value="">Seleccione tipo</option>
+                                <option value="Consulta General">Consulta General</option>
+                                <option value="Emergencia">Emergencia</option>
+                                <option value="Control">Control</option>
+                                <option value="Cirugía">Cirugía</option>
+                                <option value="Especialidad">Especialidad</option>
+                                <option value="Hospitalización">Hospitalización</option>
+                            </select>
+                            <label for="tipoConsulta"><i class="fas fa-stethoscope me-2"></i>Tipo de Consulta</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <textarea class="form-control" id="sintomas" th:field="*{sintomas}"
+                                      placeholder="Síntomas presentados" required></textarea>
+                            <label for="sintomas"><i class="fas fa-temperature-high me-2"></i>Síntomas</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <textarea class="form-control" id="tratamiento" th:field="*{tratamiento}"
+                                      placeholder="Tratamiento prescrito" required></textarea>
+                            <label for="tratamiento"><i class="fas fa-procedures me-2"></i>Tratamiento</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <textarea class="form-control" id="medicamentos" th:field="*{medicamentos}"
+                                      placeholder="Medicamentos recetados" required></textarea>
+                            <label for="medicamentos"><i class="fas fa-pills me-2"></i>Medicamentos</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <textarea class="form-control" id="observaciones" th:field="*{observaciones}"
+                                      placeholder="Observaciones adicionales"></textarea>
+                            <label for="observaciones"><i class="fas fa-comment me-2"></i>Observaciones</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn-custom">
+                    <i class="fas fa-save me-2"></i>Actualizar Historial
+                </button>
+                <a th:href="@{/historiales/}" class="btn-secondary-custom">
+                    <i class="fas fa-arrow-left me-2"></i>Volver a la Lista
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
