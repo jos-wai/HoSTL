@@ -1,0 +1,150 @@
+=====================================================
+   SISTEMA HOSPITAL - RegHost
+   Sistema de Gestión Hospitalaria
+=====================================================
+
+ESTRUCTURA COMPLETADA DEL PROYECTO:
+===================================
+
+1. ENTIDADES (entity/):
+   - Paciente.java
+   - Doctor.java
+   - Emergencia.java
+
+2. REPOSITORIOS (repository/):
+   - PacienteRepository.java
+   - DoctorRepository.java
+   - EmergenciaRepository.java
+
+3. SERVICIOS (service/):
+   - PacienteService.java
+   - DoctorService.java
+   - EmergenciaService.java
+
+4. CONTROLADORES (controller/):
+   - PacienteController.java
+   - DoctorController.java
+   - EmergenciaController.java
+   - MenuController.java
+
+5. CONFIGURACIÓN (config/):
+   - SecurityConfig.java
+
+6. PLANTILLAS HTML (templates/):
+   - Login.html
+   - menu.html
+   - pacientes/lista_pacientes.html
+   - pacientes/nuevo_paciente.html
+   - pacientes/editar_paciente.html
+   - doctores/lista_doctores.html
+   - doctores/nuevo_doctor.html
+   - doctores/editar_doctor.html
+   - emergencias/lista_emergencias.html
+   - emergencias/nueva_emergencia.html
+   - emergencias/editar_emergencia.html
+
+REQUISITOS PREVIOS:
+==================
+1. Java JDK 17 o superior
+2. MySQL Server 8.0+
+3. Maven 3.6+
+
+CONFIGURACIÓN DE BASE DE DATOS:
+================================
+1. Crear base de datos en MySQL:
+   CREATE DATABASE hospital;
+
+2. Configurar credenciales en application.properties:
+   - URL: jdbc:mysql://localhost:3306/hospital
+   - Usuario: root
+   - Contraseña: 123456
+
+USUARIOS DEL SISTEMA:
+====================
+El sistema tiene 2 usuarios pre-configurados:
+
+1. Administrador:
+   Usuario: admin
+   Contraseña: admin123
+   Rol: ADMIN
+
+2. Doctor:
+   Usuario: doctor
+   Contraseña: doctor123
+   Rol: DOCTOR
+
+EJECUTAR EL PROYECTO:
+====================
+1. Abrir terminal en la carpeta del proyecto
+
+2. Compilar el proyecto:
+   ./mvnw clean install
+
+3. Ejecutar la aplicación:
+   ./mvnw spring-boot:run
+
+4. Acceder a la aplicación:
+   http://localhost:8080
+
+FUNCIONALIDADES:
+================
+1. GESTIÓN DE PACIENTES:
+   - Registrar nuevos pacientes
+   - Listar todos los pacientes
+   - Editar información de pacientes
+   - Eliminar pacientes
+   - Información completa: personal, contacto y médica
+
+2. GESTIÓN DE DOCTORES:
+   - Registrar nuevos doctores
+   - Listar todos los doctores
+   - Editar información de doctores
+   - Eliminar doctores
+   - Especialidades y experiencia
+
+3. GESTIÓN DE EMERGENCIAS:
+   - Registrar emergencias médicas
+   - Asignar doctores a emergencias
+   - Seguimiento de estados de salud
+   - Listar y gestionar emergencias activas
+
+4. SEGURIDAD:
+   - Autenticación de usuarios
+   - Control de acceso
+   - Sesiones seguras
+
+ESTRUCTURA DE TABLAS:
+====================
+El sistema creará automáticamente las siguientes tablas:
+
+1. pacientes:
+   - Información personal y demográfica
+   - Datos de contacto y emergencia
+   - Información médica y casos
+
+2. doctores:
+   - Información personal
+   - Datos profesionales
+   - Especialidades y licencias
+
+3. emergencias:
+   - Registro de casos de emergencia
+   - Asignación de doctores
+   - Estados de salud
+
+NOTAS IMPORTANTES:
+==================
+- El sistema usa Hibernate para crear automáticamente las tablas
+- Las tablas se crean en el primer arranque si no existen
+- Los datos se persisten en MySQL
+- Spring Security maneja la autenticación
+- Thymeleaf renderiza las vistas HTML
+
+SOPORTE TÉCNICO:
+===============
+Para problemas o preguntas sobre el sistema, contacte al administrador.
+
+=====================================================
+   Proyecto desarrollado con Spring Boot 4.0.0
+   Framework: Spring MVC + Thymeleaf + MySQL
+=====================================================
